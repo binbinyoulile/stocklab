@@ -1,0 +1,14 @@
+# 本地缓存与临时文件
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store
+
+# 本地密钥（本应用不需要，但防手滑）
+.env
+.streamlit/secrets.toml
