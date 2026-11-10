@@ -108,8 +108,11 @@ def fetch_daily(
         if cached is None:
             cached = _fetch_chunk(code, cs, ce)
             if cached:
-                CACHE_DIR.mkdir(parents=True, exist_ok=True)
-                path.write_text(json.dumps(cached, ensure_ascii=False), encoding="utf-8")
+                try:  # 云端文件系统可能是只读的，缓存失败不影响取数
+                    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+                    path.write_text(json.dumps(cached, ensure_ascii=False), encoding="utf-8")
+                except OSError:
+                    pass
         for row in cached:
             rows[row["date"]] = row
 
